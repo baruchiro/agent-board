@@ -1,0 +1,22 @@
+services:
+  agent-board:
+    container_name: agent-board
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${AGENT_BOARD_PORT:-4100}:4100"
+    environment:
+      PORT: 4100
+      DB_PATH: /data/agent-board.sqlite
+      REDACT_KEEP: ${REDACT_KEEP:-200}
+    volumes:
+      - agent-board-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:4100/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  agent-board-data:

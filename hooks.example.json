@@ -1,0 +1,27 @@
+{
+  "//": "Commit this into a repo's .claude/settings.json (or ~/.claude/settings.json for every project). It is identical on every machine: the token comes from each host's own environment, so nothing secret is committed. An unset AGENT_BOARD_TOKEN interpolates to an empty string and the report lands under the 'unidentified' host rather than vanishing.",
+
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ],
+    "PreToolUse": [
+      { "matcher": "", "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ],
+    "Notification": [
+      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ],
+    "PermissionRequest": [
+      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ],
+    "Stop": [
+      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ],
+    "SessionEnd": [
+      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+    ]
+  }
+}

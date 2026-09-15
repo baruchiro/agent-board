@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Env — commit .env.example, never .env
+.env
+.env.*
+!.env.example
+
+# Build output / caches
+dist/
+build/
+.next/
+.turbo/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# superpowers brainstorming visual-companion runtime files
+.superpowers/
+
+# playwright-cli — ignore session state, keep the committed config
+.playwright/*
+!.playwright/cli.config.json
+.playwright-cli/

@@ -1,0 +1,21 @@
+{
+  "name": "agent-board",
+  "version": "0.1.0",
+  "description": "A kanban board for AI coding agents that report in, wherever they run.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/baruchiro/agent-board.git" },
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "host": "bun run src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "stories": "node scripts/check-stories.mjs",
+    "check": "bun run typecheck && bun run stories && bun run test"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "typescript": "^5.7.2"
+  }
+}
