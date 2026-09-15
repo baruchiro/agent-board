@@ -50,7 +50,15 @@ bun run src/cli.ts add laptop local    # prints this host's token, once
 bun run dev                            # http://localhost:4100
 ```
 
-Or `docker compose up -d --build`.
+Or run the published image:
+
+```sh
+docker run -d -p 4100:4100 -v agent-board-data:/data ghcr.io/baruchiro/agent-board:latest
+```
+
+`docker compose up -d --build` builds it from source instead. Every push to
+`main` publishes `:latest` and `:sha-<commit>` for `linux/amd64` and
+`linux/arm64`; tags `vX.Y.Z` publish the matching semver tags.
 
 ### Make a host report
 
