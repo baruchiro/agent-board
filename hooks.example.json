@@ -1,27 +1,153 @@
 {
-  "//": "Commit this into a repo's .claude/settings.json (or ~/.claude/settings.json for every project). It is identical on every machine: the token comes from each host's own environment, so nothing secret is committed. An unset AGENT_BOARD_TOKEN interpolates to an empty string and the report lands under the 'unidentified' host rather than vanishing.",
-
+  "//": "Commit this into a repo's .claude/settings.json (or ~/.claude/settings.json for every project). It is identical on every machine: the credentials come from each host's own environment, so nothing secret is committed. AGENT_BOARD_TOKEN identifies WHICH host is reporting. The CF_ACCESS_* pair authenticates the request to Cloudflare Access with no human in the middle (a Service Auth policy on the ingest path) \u2014 drop those two headers if your board is not behind Access. An unset variable interpolates to an empty string rather than failing, so a half-provisioned host reports as 'unidentified' instead of vanishing.",
   "hooks": {
     "SessionStart": [
-      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "UserPromptSubmit": [
-      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "PreToolUse": [
-      { "matcher": "", "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "Notification": [
-      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "PermissionRequest": [
-      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "Stop": [
-      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "SessionEnd": [
-      { "hooks": [{ "type": "http", "url": "https://agents.example.com/ingest", "headers": { "Authorization": "Bearer $AGENT_BOARD_TOKEN" }, "allowedEnvVars": ["AGENT_BOARD_TOKEN"], "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://agents.example.com/ingest",
+            "headers": {
+              "Authorization": "Bearer $AGENT_BOARD_TOKEN",
+              "CF-Access-Client-Id": "$CF_ACCESS_CLIENT_ID",
+              "CF-Access-Client-Secret": "$CF_ACCESS_CLIENT_SECRET"
+            },
+            "allowedEnvVars": [
+              "AGENT_BOARD_TOKEN",
+              "CF_ACCESS_CLIENT_ID",
+              "CF_ACCESS_CLIENT_SECRET"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }

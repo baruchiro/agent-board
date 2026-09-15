@@ -79,6 +79,32 @@ reporting properly stays visible.
 Cloud sessions additionally need the ingest host in their environment's
 **Custom** network allowlist. That is per-environment, with no org-wide list.
 
+### Putting it behind Cloudflare Access
+
+The board is a window onto everything your agents are doing, so a public
+hostname needs a gate — but agents have no human to complete a browser login.
+Cloudflare Access splits that cleanly, with two applications on one hostname
+(the more specific path wins):
+
+| Access application | Policy | Who gets in |
+|---|---|---|
+| `agents.example.com/ingest` | **Service Auth** | agents, via a service token |
+| `agents.example.com` | Allow, your identity | you |
+
+A [service token](https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/service-tokens/)
+is a static `CF-Access-Client-Id` / `CF-Access-Client-Secret` pair. Access
+validates it instead of redirecting to an identity provider — which is exactly
+the no-human-in-the-middle case. `hooks.example.json` already sends both
+headers; put the pair in each reporting host's environment next to
+`AGENT_BOARD_TOKEN` and they interpolate the same way.
+
+The two credentials do different jobs and neither replaces the other: the
+service token proves *some* machine of yours is calling, and `AGENT_BOARD_TOKEN`
+says *which* machine it is.
+
+The policy action must be **Service Auth** — any other action makes Access
+prompt for a login the agent cannot complete.
+
 ## HTTP surface
 
 | Route | |

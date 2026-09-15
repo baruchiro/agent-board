@@ -227,6 +227,11 @@ bun run dev                           # http://localhost:4100
   visible; dropping them would not.
 - **`/ingest` always answers `{}`.** Until the approvals milestone, the board
   must never be able to block or alter a session.
+- **The app has no login of its own.** Reading the board is gated at the edge
+  (a Cloudflare Access identity policy on everything but `/ingest`), and
+  `/ingest` is gated by a Service Auth policy plus the per-host bearer token.
+  Do not add app-level session auth without deciding that the edge gate is
+  going away.
 - **Approvals must ride the hook *response*, never a callback.** The agent is
   already waiting on it synchronously. A reverse channel to the agent's machine
   cannot work: cloud sandboxes and NAT'd laptops accept no inbound connections.
